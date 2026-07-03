@@ -1,8 +1,10 @@
 import time
 import numpy as np
+import random
 from PIL import Image
 
-image = Image.open("stonehenge-colored.jpg")
+images = ["arcteryx.png"]
+image = Image.open(random.choice(images))
 grayscale_image = image.convert('L')
 
 matrix = np.array(grayscale_image, dtype=float)
@@ -10,7 +12,7 @@ matrix = np.array(grayscale_image, dtype=float)
 # ----- SVD ------
 U, S, V = np.linalg.svd(matrix, full_matrices=False)
 
-ranks_to_show = [1, 10, 50, 150, 300, 1000, matrix.shape[0]]
+ranks_to_show = [1, 10, 50, 150, 300, 1000]
 
 for k in ranks_to_show:
     # Efficient matrix reconstruction using slicing: U_k * Sigma_k * V_k
